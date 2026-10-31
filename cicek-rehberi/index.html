@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#d6336c">
+  <title>Çiçek Rehberi</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="ust">
+    <h1>🌸 Çiçek Rehberi</h1>
+    <input id="ara" type="search" placeholder="Çiçek ya da anlam ara (ör. aşk)" aria-label="Ara" autocomplete="off">
+    <div class="sekmeler" role="tablist">
+      <button class="sekme aktif" data-sekme="hepsi" role="tab">Hepsi</button>
+      <button class="sekme" data-sekme="favori" role="tab">♥ Favoriler</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="bugun" class="bugun" aria-live="polite"></section>
+    <ul id="liste" class="liste"></ul>
+    <p id="bos" class="bos" hidden></p>
+  </main>
+
+  <div id="detay" class="detay" hidden role="dialog" aria-modal="true" aria-labelledby="detay-ad">
+    <div class="detay-kutu">
+      <button id="kapat" class="kapat" aria-label="Kapat">✕</button>
+      <div id="detay-icerik"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

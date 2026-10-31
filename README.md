@@ -31,3 +31,23 @@ python3 -m unittest -v
 ### Ayarlar
 
 `saklambac.py` dosyasının başındaki `ARKADAS_SAYISI`, `HAK`, `IPUCU_HAKKI` ve `SAYMA_SURESI` değerlerini değiştirerek oyunu kolaylaştırıp zorlaştırabilirsin. `YERLER` sözlüğüne yeni oda ve saklanma yeri de ekleyebilirsin.
+
+## Çiçek Rehberi (mobil uygulama)
+
+`cicek-rehberi/` klasöründe, telefonda uygulama gibi çalışan bir web uygulaması (PWA) var. 15 çiçeğin anlamını, belirgin özelliklerini (görünüş, koku, boy), mevsimini ve bakım ipucunu gösterir.
+
+- Çiçek adına, anlama ya da özelliğe göre arama (Türkçe karakter yazmasan da bulur: `ask` yazınca `aşk` sonuçları gelir)
+- Favorilere ekleme (telefonda saklanır)
+- Günün çiçeği
+- Açık/koyu tema, internetsiz çalışma
+
+### Çalıştırma
+
+```
+cd cicek-rehberi
+python3 -m http.server 8000
+```
+
+Sonra tarayıcıda `http://localhost:8000` adresini aç. Telefonda denemek için bilgisayarın IP adresini kullanabilirsin. Uygulamayı GitHub Pages ile yayınlarsan telefonda tarayıcı menüsünden "Ana ekrana ekle" diyerek yükleyebilirsin.
+
+Not: Anlamlar genel kabul gören kültürel yorumlardır, kaynağa ve kültüre göre değişebilir. Yeni çiçek eklemek için `cicek-rehberi/app.js` içindeki `CICEKLER` listesine bir satır eklemen yeterli.

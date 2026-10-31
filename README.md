@@ -20,6 +20,14 @@ python3 saklambac.py
 - Aynı yere tekrar bakmak hak harcamaz.
 - `çık` yazarak oyundan çıkabilirsin.
 
+### Testler
+
+`test_saklambac.py` dosyasında oyunun fonksiyonlarını ve tüm oyun akışını (kazanma, kaybetme, ipucu, tekrar oynama) deneyen testler var. Ek paket gerekmez, Python'un kendi `unittest` modülü kullanılır.
+
+```
+python3 -m unittest -v
+```
+
 ### Ayarlar
 
 `saklambac.py` dosyasının başındaki `ARKADAS_SAYISI`, `HAK`, `IPUCU_HAKKI` ve `SAYMA_SURESI` değerlerini değiştirerek oyunu kolaylaştırıp zorlaştırabilirsin. `YERLER` sözlüğüne yeni oda ve saklanma yeri de ekleyebilirsin.

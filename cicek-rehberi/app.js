@@ -4,48 +4,48 @@
 const CICEKLER = [
   { id: "gul", ad: "Gül", latince: "Rosa", emoji: "🌹", kisa: "Aşk ve tutku",
     anlam: "Kırmızı gül aşk ve tutkuyu, beyaz gül saflığı ve yeni başlangıcı, sarı gül dostluğu, pembe gül ise minnettarlığı ve zarafeti anlatır.",
-    mevsim: "İlkbahar - Sonbahar", bakim: "Güneşi sever, düzenli sulanmalı ve çiçeklendikten sonra budanmalıdır." },
+    mevsim: "İlkbahar - Sonbahar", bakim: "Güneşi sever ve düzenli sulanmalıdır. Solan çiçekler kesilir, asıl budama kış sonunda yapılır." },
   { id: "lale", ad: "Lale", latince: "Tulipa", emoji: "🌷", kisa: "Mükemmel aşk",
     anlam: "Mükemmel ve derin aşkı simgeler. Türk kültüründe ayrıca çok özel bir yeri vardır; Osmanlı'da Lale Devri adıyla anılan bir dönem bile yaşanmıştır.",
     mevsim: "İlkbahar", bakim: "Soğuk kış geçirmesi gerekir. Soğan olarak sonbaharda dikilir." },
-  { id: "papatya", ad: "Papatya", latince: "Bellis perennis", emoji: "🌼", kisa: "Masumiyet ve saflık",
+  { id: "papatya", ad: "Papatya", latince: "Bellis perennis, Matricaria chamomilla", emoji: "🌼", kisa: "Masumiyet ve saflık",
     anlam: "Masumiyeti, saflığı ve içtenliği temsil eder. \"Seviyor, sevmiyor\" falıyla da bilinir.",
     mevsim: "İlkbahar - Yaz", bakim: "Çok bakım istemez, güneşli yeri sever." },
   { id: "aycicegi", ad: "Ayçiçeği", latince: "Helianthus annuus", emoji: "🌻", kisa: "Bağlılık ve neşe",
-    anlam: "Başını güneşe çevirmesi nedeniyle bağlılığı, sadakati ve pozitif enerjiyi simgeler.",
+    anlam: "Genç ayçiçekleri gün boyu güneşi izlediği için bağlılığı, sadakati ve pozitif enerjiyi simgeler. Olgunlaşınca doğuya dönük sabitlenir.",
     mevsim: "Yaz", bakim: "Tam güneş ve bol su ister, uzun boylu olduğu için desteğe ihtiyaç duyabilir." },
-  { id: "lavanta", ad: "Lavanta", latince: "Lavandula", emoji: "🪻", kisa: "Sakinlik ve dürüstlük",
+  { id: "lavanta", ad: "Lavanta", latince: "Lavandula", emoji: "🌿", kisa: "Sakinlik ve dürüstlük",
     anlam: "Huzuru, sakinliği ve sadakati anlatır. Kokusu rahatlatıcı olduğu için uykuyla da ilişkilendirilir.",
     mevsim: "Yaz", bakim: "Kurak ve güneşli yeri sever, az su yeterlidir." },
   { id: "menekse", ad: "Menekşe", latince: "Viola", emoji: "💜", kisa: "Tevazu ve sadakat",
     anlam: "Alçakgönüllülüğü, tevazuyu ve sadık sevgiyi simgeler. Yere yakın, mütevazı duruşuyla bilinir.",
     mevsim: "Erken ilkbahar", bakim: "Yarı gölgeyi ve nemli toprağı sever." },
-  { id: "karanfil", ad: "Karanfil", latince: "Dianthus caryophyllus", emoji: "🌺", kisa: "Hayranlık ve sevgi",
+  { id: "karanfil", ad: "Karanfil", latince: "Dianthus caryophyllus", emoji: "🌸", kisa: "Hayranlık ve sevgi",
     anlam: "Kırmızı karanfil derin sevgiyi ve hayranlığı, beyaz karanfil saf sevgiyi, pembe karanfil ise anne sevgisini anlatır.",
     mevsim: "İlkbahar - Yaz", bakim: "Güneşi ve iyi süzülen toprağı sever, fazla sulanmamalı." },
   { id: "orkide", ad: "Orkide", latince: "Orchidaceae", emoji: "🪷", kisa: "Zarafet ve güzellik",
     anlam: "Zarafeti, lüksü, güzelliği ve inceliği simgeler. Hediye olarak çok tercih edilir.",
     mevsim: "Tüm yıl (iç mekân)", bakim: "Dolaylı ışık ister, haftada bir az su yeterlidir. Kökleri çürümesin diye suda bırakılmamalı." },
-  { id: "sumbul", ad: "Sümbül", latince: "Hyacinthus orientalis", emoji: "💐", kisa: "Neşe ve bağışlanma",
+  { id: "sumbul", ad: "Sümbül", latince: "Hyacinthus orientalis", emoji: "🪻", kisa: "Neşe ve bağışlanma",
     anlam: "Renge göre değişir: mor sümbül \"üzgünüm, beni bağışla\" derken, mavi sümbül sadakati, pembe sümbül oyunu ve neşeyi anlatır.",
     mevsim: "İlkbahar", bakim: "Soğan olarak sonbaharda dikilir, güneşli ya da yarı gölgeli yeri sever." },
-  { id: "nergis", ad: "Nergis", latince: "Narcissus", emoji: "🌼", kisa: "Yeni başlangıç ve umut",
+  { id: "nergis", ad: "Nergis", latince: "Narcissus", emoji: "🏵️", kisa: "Yeni başlangıç ve umut",
     anlam: "Baharın habercisi olduğu için yeni başlangıçları ve umudu simgeler. Mitolojide kendine hayran olmasıyla (narsisizm) da anılır.",
     mevsim: "Kış sonu - İlkbahar", bakim: "Soğan olarak sonbaharda dikilir, çok az bakım ister." },
   { id: "zambak", ad: "Zambak", latince: "Lilium", emoji: "🤍", kisa: "Saflık ve asalet",
     anlam: "Beyaz zambak saflığı, temizliği ve asaleti simgeler. Birçok kültürde törenlerde kullanılır.",
     mevsim: "Yaz", bakim: "Güneş ve iyi süzülen toprak ister, soğanı su içinde kalmamalı." },
-  { id: "yasemin", ad: "Yasemin", latince: "Jasminum", emoji: "🤍", kisa: "Zarafet ve tatlılık",
+  { id: "yasemin", ad: "Yasemin", latince: "Jasminum", emoji: "⭐", kisa: "Zarafet ve tatlılık",
     anlam: "Zarafeti, sevgiyi ve tatlılığı anlatır. Akşamları yoğunlaşan kokusuyla bilinir.",
     mevsim: "Yaz", bakim: "Güneşi sever, sırık ya da tel gibi bir desteğe tırmanır." },
-  { id: "mimoza", ad: "Mimoza", latince: "Acacia dealbata", emoji: "🌱", kisa: "Nezaket ve duyarlılık",
+  { id: "mimoza", ad: "Mimoza", latince: "Acacia dealbata", emoji: "🟡", kisa: "Nezaket ve duyarlılık",
     anlam: "Nezaketi ve duyarlılığı simgeler. Türkiye'de ve birçok ülkede 8 Mart Dünya Kadınlar Günü ile ilişkilendirilir.",
     mevsim: "Kış sonu", bakim: "Soğuktan korunmuş, güneşli bir yer ister." },
   { id: "gelincik", ad: "Gelincik", latince: "Papaver rhoeas", emoji: "🌺", kisa: "Hatıra ve anma",
     anlam: "Kırmızı rengi nedeniyle birçok ülkede anma ve hatıra çiçeği olarak kullanılır. Kısa ömürlüdür, kopartılınca çabuk solar.",
     mevsim: "İlkbahar", bakim: "Doğada kendi kendine yetişir, tohumuyla çoğalır." },
-  { id: "ortanca", ad: "Ortanca", latince: "Hydrangea", emoji: "💠", kisa: "Minnettarlık",
-    anlam: "Bol ve dolgun çiçek öbekleriyle minnettarlığı ve içten teşekkürü anlatır. Toprağın asitliğine göre rengi pembe ile mavi arasında değişebilir.",
+  { id: "ortanca", ad: "Ortanca", latince: "Hydrangea", emoji: "💮", kisa: "Minnettarlık",
+    anlam: "Bol ve dolgun çiçek öbekleriyle minnettarlığı ve içten teşekkürü anlatır. Anlamı kültüre göre değişir: Victoria dönemi İngiltere'sinde ise gösteriş ve kayıtsızlıkla ilişkilendirilirdi.",
     mevsim: "Yaz", bakim: "Nemli toprak ve yarı gölgeyi sever, çok su ister." },
 ];
 
@@ -88,6 +88,7 @@ function favorileriKaydet() {
 
 let sekme = "hepsi";
 let aramaMetni = "";
+let sonOdak = null; // detay penceresi kapanınca odağın döneceği öğe
 
 const $liste = document.getElementById("liste");
 const $bos = document.getElementById("bos");
@@ -154,8 +155,9 @@ function listeyiCiz() {
 }
 
 function bugununCicegi() {
-  // Her gün aynı çiçek çıksın diye gün sayısına göre seçilir.
-  const gun = Math.floor(Date.now() / 86400000);
+  // Her gün aynı çiçek çıksın diye yerel takvim gününe göre seçilir (gece yarısı değişir).
+  const simdi = new Date();
+  const gun = Math.floor(Date.UTC(simdi.getFullYear(), simdi.getMonth(), simdi.getDate()) / 86400000);
   return CICEKLER[gun % CICEKLER.length];
 }
 
@@ -202,13 +204,31 @@ function detayAc(id) {
     ogeOlustur("p", "", c.bakim),
     buton
   );
+  if ($detay.hidden) {
+    // Pencere ilk kez açılıyor: odağı hatırla, arka planı kilitle, geri tuşu pencereyi kapatsın.
+    sonOdak = document.activeElement;
+    document.body.classList.add("kilit");
+    try { history.pushState({ detay: true }, ""); } catch (_) { /* file:// gibi durumlarda yoksay */ }
+  }
   $detay.hidden = false;
   document.getElementById("kapat").focus();
 }
 
 function detayKapat() {
+  if ($detay.hidden) return;
   $detay.hidden = true;
+  document.body.classList.remove("kilit");
+  if (sonOdak && sonOdak.isConnected) sonOdak.focus();
+  sonOdak = null;
 }
+
+// Kullanıcı kapatma isteğinde (X, boşluğa dokunma, Esc) geçmişteki kaydı da geri alır.
+function kapatIstegi() {
+  if (history.state && history.state.detay) history.back();
+  else detayKapat();
+}
+
+window.addEventListener("popstate", detayKapat);
 
 $ara.addEventListener("input", () => { aramaMetni = $ara.value; listeyiCiz(); });
 
@@ -220,9 +240,9 @@ for (const dugme of document.querySelectorAll(".sekme")) {
   });
 }
 
-document.getElementById("kapat").addEventListener("click", detayKapat);
-$detay.addEventListener("click", (olay) => { if (olay.target === $detay) detayKapat(); });
-document.addEventListener("keydown", (olay) => { if (olay.key === "Escape") detayKapat(); });
+document.getElementById("kapat").addEventListener("click", kapatIstegi);
+$detay.addEventListener("click", (olay) => { if (olay.target === $detay) kapatIstegi(); });
+document.addEventListener("keydown", (olay) => { if (olay.key === "Escape") kapatIstegi(); });
 
 bugunuCiz();
 listeyiCiz();

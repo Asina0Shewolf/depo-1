@@ -161,4 +161,6 @@ main { padding: 14px 16px 32px; max-width: 640px; margin: 0 auto; }
 .detay .detay-kalp { display: block; margin: 18px auto 0; padding: 12px 20px; border: 1px solid var(--vurgu); border-radius: 12px; background: none; color: var(--vurgu); font-size: 1rem; cursor: pointer; }
 .detay .detay-kalp.acik { background: var(--vurgu); color: #fff; }
 
+body.kilit { overflow: hidden; }
+
 :focus-visible { outline: 2px solid var(--vurgu); outline-offset: 2px; }

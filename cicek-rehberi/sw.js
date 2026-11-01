@@ -1,6 +1,10 @@
-// Basit çevrimdışı önbellek: uygulama dosyaları bir kez yüklendikten sonra internetsiz de açılır.
-const SURUM = "cicek-rehberi-v2";
-const DOSYALAR = ["./", "./index.html", "./style.css", "./app.js", "./manifest.webmanifest", "./icon.svg"];
+// Çevrimdışı önbellek: önce internetten çeker (güncellemeler hemen görünür),
+// internet yoksa önbellekteki son sürümü kullanır.
+const SURUM = "cicek-rehberi-v3";
+const DOSYALAR = [
+  "./", "./index.html", "./style.css", "./app.js",
+  "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png", "./icon-180.png",
+];
 
 self.addEventListener("install", (olay) => {
   olay.waitUntil(caches.open(SURUM).then((onbellek) => onbellek.addAll(DOSYALAR)));
@@ -19,6 +23,14 @@ self.addEventListener("activate", (olay) => {
 self.addEventListener("fetch", (olay) => {
   if (olay.request.method !== "GET") return;
   olay.respondWith(
-    caches.match(olay.request).then((kayit) => kayit || fetch(olay.request))
+    fetch(olay.request)
+      .then((yanit) => {
+        if (yanit.ok && new URL(olay.request.url).origin === location.origin) {
+          const kopya = yanit.clone();
+          caches.open(SURUM).then((onbellek) => onbellek.put(olay.request, kopya));
+        }
+        return yanit;
+      })
+      .catch(() => caches.match(olay.request))
   );
 });

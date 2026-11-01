@@ -6,6 +6,7 @@
 //   2) başka bir terminalde:      node test_ui.js http://localhost:8000/index.html
 const { chromium } = require('playwright');
 const assert = require('assert');
+const path = require('path');
 
 (async () => {
   const url = process.argv[2] || 'http://localhost:8000/index.html';
@@ -94,6 +95,61 @@ const assert = require('assert');
     return { bugun: bugununCicegi().id, beklenen: secim(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()) };
   });
   assert.strictEqual(gunluk.bugun, gunluk.beklenen);
+
+  // ---- Fotoğraf ekranı ----
+  assert.ok(await page.locator('#foto-ac').isVisible());
+  assert.ok(await page.locator('#foto').isHidden());
+  assert.strictEqual(await page.getAttribute('#foto-kamera', 'capture'), 'environment', 'kamera girişi arka kamerayı açmalı');
+  assert.strictEqual(await page.getAttribute('#foto-galeri', 'capture'), null, 'galeri girişinde capture olmamalı');
+  await page.click('#foto-ac');
+  assert.ok(await page.locator('#foto').isVisible());
+  assert.strictEqual(await page.locator('#foto-liste .kart').count(), 15);
+  assert.ok(await page.locator('#foto-onizleme').isHidden());
+
+  // Resim olmayan dosya reddedilir
+  await page.setInputFiles('#foto-galeri', { name: 'not.txt', mimeType: 'text/plain', buffer: Buffer.from('merhaba') });
+  assert.match(await page.locator('#foto-durum').textContent(), /fotoğraf değil/);
+  assert.ok(await page.locator('#foto-onizleme').isHidden());
+
+  // Resim seçilince önizleme görünür ve gerçekten yüklenir
+  await page.setInputFiles('#foto-kamera', path.join(__dirname, 'icon-192.png'));
+  await page.waitForFunction(() => {
+    const i = document.getElementById('foto-onizleme');
+    return !i.hidden && i.naturalWidth > 0;
+  });
+  assert.match(await page.locator('#foto-durum').textContent(), /karşılaştır/);
+
+  // Listeden çiçek seçilince detay, fotoğraf ekranının üstünde açılır
+  await page.locator('#foto-liste .kart .metin').nth(1).click(); // Lale
+  assert.ok(await page.locator('#detay').isVisible());
+  assert.ok(await page.locator('#foto').isVisible(), 'fotoğraf ekranı altta açık kalmalı');
+  assert.match(await page.locator('#detay h2').textContent(), /Lale/);
+  const detayUstte = await page.evaluate(() => {
+    const r = document.getElementById('detay').getBoundingClientRect();
+    return !!document.elementFromPoint(r.left + r.width / 2, r.bottom - 20).closest('#detay');
+  });
+  assert.ok(detayUstte, 'detay fotoğraf ekranının üstünde olmalı');
+
+  // Geri tuşu önce detayı, sonra fotoğraf ekranını kapatır; fotoğraf temizlenir
+  await page.goBack();
+  assert.ok(await page.locator('#detay').isHidden());
+  assert.ok(await page.locator('#foto').isVisible());
+  assert.ok(await page.evaluate(() => document.body.classList.contains('kilit')), 'fotoğraf açıkken kilit sürmeli');
+  await page.goBack();
+  assert.ok(await page.locator('#foto').isHidden());
+  assert.ok(!(await page.evaluate(() => document.body.classList.contains('kilit'))));
+  assert.ok(await page.locator('#foto-onizleme').isHidden(), 'kapatınca fotoğraf temizlenmeli');
+  assert.strictEqual(await page.getAttribute('#foto-onizleme', 'src'), null);
+
+  // Esc de her seferinde yalnızca en üstteki pencereyi kapatır
+  await page.click('#foto-ac');
+  await page.locator('#foto-liste .kart .metin').first().click();
+  await page.keyboard.press('Escape');
+  assert.ok(await page.locator('#detay').isHidden());
+  assert.ok(await page.locator('#foto').isVisible());
+  await page.keyboard.press('Escape');
+  assert.ok(await page.locator('#foto').isHidden());
+  assert.ok(await page.evaluate(() => document.activeElement.id === 'foto-ac'), 'odak foto düğmesine dönmeli');
 
   // Yatay taşma yok
   assert.ok(!(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth)));

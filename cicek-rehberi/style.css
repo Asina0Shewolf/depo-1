@@ -161,6 +161,52 @@ main { padding: 14px 16px 32px; max-width: 640px; margin: 0 auto; }
 .detay .detay-kalp { display: block; margin: 18px auto 0; padding: 12px 20px; border: 1px solid var(--vurgu); border-radius: 12px; background: none; color: var(--vurgu); font-size: 1rem; cursor: pointer; }
 .detay .detay-kalp.acik { background: var(--vurgu); color: #fff; }
 
+[hidden] { display: none !important; }
+
 body.kilit { overflow: hidden; }
+
+main { padding-bottom: 96px; }
+
+.foto-fab {
+  position: fixed;
+  right: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  z-index: 6;
+  padding: 14px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--vurgu);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.detay .foto-not { margin: 6px 0 14px; color: var(--soluk); font-size: 0.92rem; text-align: center; }
+.foto-butonlar { display: flex; gap: 8px; }
+
+.detay .foto-buton {
+  flex: 1;
+  padding: 12px 8px;
+  border: 1px solid var(--vurgu);
+  border-radius: 12px;
+  background: none;
+  color: var(--vurgu);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.detay .foto-durum { margin: 12px 0 0; text-align: center; font-size: 0.92rem; min-height: 1.3em; }
+
+.foto-onizleme {
+  display: block;
+  width: 100%;
+  max-height: 38vh;
+  object-fit: contain;
+  margin: 10px 0 16px;
+  border-radius: 12px;
+  background: var(--vurgu-acik);
+}
 
 :focus-visible { outline: 2px solid var(--vurgu); outline-offset: 2px; }

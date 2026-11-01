@@ -33,6 +33,7 @@
 - **Gerçek fotoğraf yok.** Emojiler çiçeği tam yansıtmıyor (ör. orkide için nilüfer 🪷 en yakın emoji). Gerçek görseller için telif hakkı sorunu olmayan fotoğraflar gerekir.
 - **Anlamlar tek kaynağa dayanmıyor.** Çiçek anlamları kültüre ve döneme göre değişir. Metinler genel kabul gören yorumları özetler, tek bir kaynaktan alınmamıştır.
 - **Gerçek telefonda denenmedi.** Testler Chromium'un telefon ekranı taklidiyle yapıldı. iOS Safari ve gerçek Android cihazlarda ayrıca denenmeli.
+- **Fotoğraftan otomatik tanıma yok.** Fotoğraf ekranı yalnızca fotoğrafı gösterir, çiçeği kullanıcı özelliklere bakarak seçer. Otomatik tanıma için ya telefonda çalışan bir model (yaklaşık 90 MB indirme, yalnızca bu 15 çiçek arasından seçer) ya da PlantNet gibi bir servis (API anahtarı ve küçük bir sunucu gerekir) eklenebilir. Çalışma ortamımdan model sunucularına erişemediğim için doğruluğu burada denenemezdi.
 - **Yalnızca 15 çiçek var** ve liste uygulamanın içinde sabit (`app.js`). Çiçek eklemek için kodu düzenlemek gerekiyor.
 - **Dil yalnızca Türkçe.**
 - **Maskable ikon yok.** Android bazı cihazlarda ikonu yuvarlak keserken kenar boşluğu bırakmaz.

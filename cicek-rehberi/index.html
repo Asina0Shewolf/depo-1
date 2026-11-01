@@ -26,6 +26,25 @@
     <p id="bos" class="bos" hidden></p>
   </main>
 
+  <button id="foto-ac" class="foto-fab" type="button">📷 Fotoğraf</button>
+
+  <div id="foto" class="detay" hidden role="dialog" aria-modal="true" aria-labelledby="foto-baslik">
+    <div class="detay-kutu">
+      <button id="foto-kapat" class="kapat" type="button" aria-label="Kapat">✕</button>
+      <h2 id="foto-baslik">Bu hangi çiçek?</h2>
+      <p class="foto-not">Bir fotoğraf çek ya da galeriden seç, sonra aşağıdaki özelliklerle karşılaştır. Otomatik tanıma henüz yok. Fotoğraf yalnızca telefonunda kalır, hiçbir yere gönderilmez.</p>
+      <div class="foto-butonlar">
+        <button id="foto-cek" class="foto-buton" type="button">📷 Fotoğraf çek</button>
+        <button id="foto-sec" class="foto-buton" type="button">🖼️ Galeriden seç</button>
+      </div>
+      <input id="foto-kamera" type="file" accept="image/*" capture="environment" hidden>
+      <input id="foto-galeri" type="file" accept="image/*" hidden>
+      <p id="foto-durum" class="foto-durum" role="status"></p>
+      <img id="foto-onizleme" class="foto-onizleme" alt="Seçtiğin fotoğraf" hidden>
+      <ul id="foto-liste" class="liste"></ul>
+    </div>
+  </div>
+
   <div id="detay" class="detay" hidden role="dialog" aria-modal="true" aria-labelledby="detay-ad">
     <div class="detay-kutu">
       <button id="kapat" class="kapat" aria-label="Kapat">✕</button>

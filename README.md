@@ -37,6 +37,7 @@ python3 -m unittest -v
 `cicek-rehberi/` klasöründe, telefonda uygulama gibi çalışan bir web uygulaması (PWA) var. 15 çiçeğin anlamını, belirgin özelliklerini (görünüş, koku, boy), mevsimini ve bakım ipucunu gösterir.
 
 - Çiçek adına, anlama ya da özelliğe göre arama (Türkçe karakter yazmasan da bulur: `ask` yazınca `aşk` sonuçları gelir)
+- Fotoğrafla çiçek bulma (basit sürüm): "📷 Fotoğraf" düğmesiyle fotoğraf çek ya da galeriden seç, fotoğrafı çiçeklerin belirgin özellikleriyle karşılaştırıp benzeyene dokun. Otomatik tanıma henüz yok. Fotoğraf yalnızca telefonda önizleme olarak gösterilir, kaydedilmez ve hiçbir yere gönderilmez.
 - Favorilere ekleme (telefonda saklanır)
 - Günün çiçeği
 - Açık/koyu tema (telefonun ayarına uyar)

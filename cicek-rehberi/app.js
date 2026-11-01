@@ -88,7 +88,7 @@ function favorileriKaydet() {
 
 let sekme = "hepsi";
 let aramaMetni = "";
-let sonOdak = null; // detay penceresi kapanınca odağın döneceği öğe
+const acik = []; // açık pencereler (sonuncusu en üstte)
 
 const $liste = document.getElementById("liste");
 const $bos = document.getElementById("bos");
@@ -204,31 +204,40 @@ function detayAc(id) {
     ogeOlustur("p", "", c.bakim),
     buton
   );
-  if ($detay.hidden) {
-    // Pencere ilk kez açılıyor: odağı hatırla, arka planı kilitle, geri tuşu pencereyi kapatsın.
-    sonOdak = document.activeElement;
-    document.body.classList.add("kilit");
-    try { history.pushState({ detay: true }, ""); } catch (_) { /* file:// gibi durumlarda yoksay */ }
-  }
-  $detay.hidden = false;
+  pencereGoster($detay);
   document.getElementById("kapat").focus();
 }
 
-function detayKapat() {
-  if ($detay.hidden) return;
-  $detay.hidden = true;
-  document.body.classList.remove("kilit");
-  if (sonOdak && sonOdak.isConnected) sonOdak.focus();
-  sonOdak = null;
+// Pencere yığını: aynı anda birden fazla pencere açılabilir (ör. fotoğraf ekranı + çiçek detayı).
+// Geri tuşu, Esc, X ve boşluğa dokunma her zaman en üstteki pencereyi kapatır.
+function pencereGoster(el) {
+  if (!el.hidden) return;
+  // Odağı hatırla, arka planı kilitle, geri tuşu pencereyi kapatsın.
+  el._sonOdak = document.activeElement;
+  el.hidden = false;
+  acik.push(el);
+  document.body.classList.add("kilit");
+  try { history.pushState({ pencere: acik.length }, ""); } catch (_) { /* file:// gibi durumlarda yoksay */ }
 }
 
-// Kullanıcı kapatma isteğinde (X, boşluğa dokunma, Esc) geçmişteki kaydı da geri alır.
+function pencereGizle() {
+  const el = acik.pop();
+  if (!el) return;
+  el.hidden = true;
+  if (acik.length === 0) document.body.classList.remove("kilit");
+  if (el._kapaninca) el._kapaninca();
+  if (el._sonOdak && el._sonOdak.isConnected) el._sonOdak.focus();
+  el._sonOdak = null;
+}
+
+// Kapatma isteğinde (X, boşluğa dokunma, Esc) geçmişteki kaydı da geri alır.
 function kapatIstegi() {
-  if (history.state && history.state.detay) history.back();
-  else detayKapat();
+  if (acik.length === 0) return;
+  if (history.state && history.state.pencere) history.back();
+  else pencereGizle();
 }
 
-window.addEventListener("popstate", detayKapat);
+window.addEventListener("popstate", pencereGizle);
 
 $ara.addEventListener("input", () => { aramaMetni = $ara.value; listeyiCiz(); });
 
@@ -243,6 +252,76 @@ for (const dugme of document.querySelectorAll(".sekme")) {
 document.getElementById("kapat").addEventListener("click", kapatIstegi);
 $detay.addEventListener("click", (olay) => { if (olay.target === $detay) kapatIstegi(); });
 document.addEventListener("keydown", (olay) => { if (olay.key === "Escape") kapatIstegi(); });
+
+// ---- Fotoğrafla tanıma (basit sürüm) ----
+// Fotoğraf yalnızca bu sayfada önizleme olarak gösterilir; kaydedilmez ve gönderilmez.
+// Otomatik tanıma yok: kullanıcı fotoğrafı çiçeklerin belirgin özellikleriyle karşılaştırıp seçer.
+const $foto = document.getElementById("foto");
+const $fotoDurum = document.getElementById("foto-durum");
+const $fotoOnizleme = document.getElementById("foto-onizleme");
+const $fotoListe = document.getElementById("foto-liste");
+let fotoUrl = null;
+
+function ilkCumle(metin) {
+  const i = metin.indexOf(". ");
+  return i === -1 ? metin : metin.slice(0, i + 1);
+}
+
+function fotoListesiniCiz() {
+  $fotoListe.replaceChildren();
+  for (const c of CICEKLER) {
+    const satir = ogeOlustur("li", "kart");
+    satir.append(ogeOlustur("span", "emoji", c.emoji));
+    const metin = ogeOlustur("button", "metin");
+    metin.type = "button";
+    metin.append(ogeOlustur("div", "ad", c.ad), ogeOlustur("div", "kisa", ilkCumle(c.ozellik)));
+    metin.addEventListener("click", () => detayAc(c.id));
+    satir.append(metin);
+    $fotoListe.append(satir);
+  }
+}
+
+function fotoTemizle() {
+  if (fotoUrl) URL.revokeObjectURL(fotoUrl);
+  fotoUrl = null;
+  $fotoOnizleme.removeAttribute("src");
+  $fotoOnizleme.hidden = true;
+  $fotoDurum.textContent = "";
+}
+
+function fotoSecildi(girdi) {
+  const dosya = girdi.files && girdi.files[0];
+  girdi.value = ""; // aynı fotoğraf tekrar seçilebilsin
+  if (!dosya) return;
+  if (!dosya.type.startsWith("image/")) {
+    $fotoDurum.textContent = "Bu bir fotoğraf değil. Lütfen bir resim seç.";
+    return;
+  }
+  if (fotoUrl) URL.revokeObjectURL(fotoUrl);
+  fotoUrl = URL.createObjectURL(dosya);
+  $fotoOnizleme.src = fotoUrl;
+  $fotoOnizleme.hidden = false;
+  $fotoDurum.textContent = "Fotoğrafı aşağıdaki özelliklerle karşılaştır, benzeyen çiçeğe dokun.";
+}
+
+$fotoOnizleme.addEventListener("error", () => {
+  $fotoOnizleme.hidden = true;
+  $fotoDurum.textContent = "Bu fotoğraf gösterilemiyor (biçimi desteklenmiyor olabilir). Başka bir fotoğraf dene.";
+});
+
+$foto._kapaninca = fotoTemizle;
+fotoListesiniCiz();
+
+document.getElementById("foto-ac").addEventListener("click", () => {
+  pencereGoster($foto);
+  document.getElementById("foto-kapat").focus();
+});
+document.getElementById("foto-kapat").addEventListener("click", kapatIstegi);
+$foto.addEventListener("click", (olay) => { if (olay.target === $foto) kapatIstegi(); });
+document.getElementById("foto-cek").addEventListener("click", () => document.getElementById("foto-kamera").click());
+document.getElementById("foto-sec").addEventListener("click", () => document.getElementById("foto-galeri").click());
+document.getElementById("foto-kamera").addEventListener("change", (olay) => fotoSecildi(olay.target));
+document.getElementById("foto-galeri").addEventListener("change", (olay) => fotoSecildi(olay.target));
 
 bugunuCiz();
 listeyiCiz();
